@@ -6,7 +6,7 @@ const monthSchema = new mongoose.Schema({
 	users: {
 		type: Array,
 		required: true,
-		deafult: [
+		default: [
 			{
 				name: "Keegan",
 				rent: 582.67,

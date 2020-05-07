@@ -11,44 +11,23 @@ const ModalOverlay = props => {
 	const content=(
 		<div className={`modal ${(props.className)}`}>
 		<div className="modal__conent" style={{marginLeft: "1rem", marginRight: "0.3rem"}}>
-			<h4 style={{textAlign: "center"}}>Amount to be Paid For {props.name}</h4>
-			<form style={{display: "flex", flexDirection: "column", alignItems: "center"}} onSubmit={props.payBills}>
+			<h4 style={{textAlign: "center"}}>Add a Month</h4>
+			<form style={{display: "flex", flexDirection: "column", alignItems: "center"}} onSubmit={props.addMonth}>
 			<input
-				type="number"
+				type="text"
 				className="formInputs"
-				placeholder="Rent"
-				value={props.rent}
-				onChange={props.changeRent}
+				placeholder="Month"
+				value={props.month}
+				onChange={props.monthHandler}
 			/>
 			<input
 				type="number"
 				className="formInputs"
-				placeholder="Internet"
-				value={props.internet}
-				onChange={props.changeInternet}
+				placeholder="Year"
+				value={props.year}
+				onChange={props.yearHandler}
 			/>
-			<input
-				type="number"
-				className="formInputs"
-				placeholder="Phone"
-				value={props.phone}
-				onChange={props.changePhone}
-			/>
-			<input
-				type="number"
-				className="formInputs"
-				placeholder="Hydro"
-				value={props.hydro}
-				onChange={props.changeHydro}
-			/>
-			<input
-				type="number"
-				className="formInputs"
-				placeholder="Grocery"
-				value={props.grocery}
-				onChange={props.changeGrocery}
-			/>
-			<Button type="submit" name="Pay" class={"btnPay"} style={{marginBottom: "1rem"}}/>
+			<Button name="Add Month" style={{marginBottom: "1rem"}} type="submit"/>
 			</form>
 		</div>
 		</div>

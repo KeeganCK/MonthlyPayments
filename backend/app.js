@@ -27,7 +27,7 @@ app.use((error, req, res, next) => {
 	res.json({message: error.message || 'An unkown error occured'});
 });
 
-mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0-7ss3m.mongodb.net/$monthlypayemnts?retryWrites=true&w=majority`, {
+mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0-vzm9v.mongodb.net/monthlypayments?retryWrites=true&w=majority`, {
 	useNewUrlParser: true,
 	useCreateIndex: true,
 	useUnifiedTopology: true
