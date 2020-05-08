@@ -1,4 +1,4 @@
-const Month = require('../models/Month');
+const Month = require('../models/month');
 const HttpError = require('../models/http-error');
 
 const { validationResult } = require('express-validator');
