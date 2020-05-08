@@ -23,7 +23,7 @@ const Main = props => {
 	useEffect(() => {
 		const getMonths = async () => {
 			try {
-				const response = await fetch(`http://localhost:5000/getmonths`);
+				const response = await fetch(`${process.env.REACT_APP_URL_PROD}/getmonths`);
 				const responseData = await response.json();
 
 				if(!response.ok) {
@@ -53,7 +53,7 @@ const Main = props => {
 	const addMonth = async event => {
 		event.preventDefault();
 		try {
-			const response = await fetch(`http://localhost:5000/addmonth`, {
+			const response = await fetch(`${process.env.REACT_APP_URL_PROD}/addmonth`, {
 				method: "POST",
 				headers: {
 					"Content-type": "application/json"

@@ -8,7 +8,7 @@ const User = props => {
 
 	const calcTotal = () => {
 		let total = props.rent + props.internet + props.phone + props.hydro + props.grocery;
-		return total;
+		return total.toFixed(2);
 	}
 
 	const [showModal, setShowModal] = useState(false);
@@ -42,7 +42,7 @@ const User = props => {
 
 	const payBills = async event => {
 		try {
-			const response = await fetch(`http://localhost:5000/paybills`, {
+			const response = await fetch(`${process.env.REACT_APP_URL_PROD}/paybills`, {
 				method: "POST",
 				headers: {
 					"Content-type": "application/json"
@@ -72,7 +72,7 @@ const User = props => {
 
 	const changeAmounts = async event => {
 		try {
-			const response = await fetch(`http://localhost:5000/changeamounts`, {
+			const response = await fetch(`${process.env.REACT_APP_URL_PROD}/changeamounts`, {
 				method: "POST",
 				headers: {
 					"Content-type": "application/json"
@@ -102,7 +102,7 @@ const User = props => {
 
 	const addAmount = async event => {
 		try {
-			const response = await fetch(`http://localhost:5000/addamounts`, {
+			const response = await fetch(`${process.env.REACT_APP_URL_PROD}/addamounts`, {
 				method: "POST",
 				headers: {
 					"Content-type": "application/json"
