@@ -1,0 +1,116 @@
+body, html {
+    background-color: #0B0C10;
+    font-family: Roboto, sans-serif;
+}
+
+*:focus {
+    outline: 0;
+}
+
+/* App styles */
+.container {
+    margin-left: 7.5%;
+    margin-right: 7.5%;
+    margin-top: 6rem;
+}
+
+@media(max-width: 768px) {
+    .container {
+        margin-left: 2.5%;
+        margin-right: 2.5%;
+        margin-top: 6rem;
+    }
+}
+
+.selectMonth {
+    background-color: #1F2833;
+    color: #66FCF1;
+    border: 0;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    padding: 5px 12px;
+    cursor: pointer;
+}
+
+.selectMonth:focus {
+    outline: none;
+}
+
+.option {
+    background-color: #1F2833;
+    color: #66FCF1;
+    border: 0;
+}
+
+/* Toolbar Styles */
+.toolbar {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    background-color: #0B0C10;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    color: #66FCF1;
+}
+
+/* UserLine styles */
+.userLine {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 0.6rem;
+}
+
+@media(max-width: 500px) {
+    .userLine {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 1rem
+    }
+}
+
+/* User styles */
+.user {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.26);
+    background-color: #1F2833;
+    color: #66FCF1;
+    border-radius: 5px;
+    padding-bottom: 1rem;
+}
+
+.innerItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.paraUser {
+    margin-bottom: 0.3rem;
+    margin-top: 0;
+}
+
+/* Button Styles */
+.btn {
+    width: 100%;
+    padding: 5px 10px 5px 10px;
+    color: #66FCF1;
+    border: 1px solid #66FCF1;
+    background-color: #1F2833;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn:active,
+.btn:focus {
+    outline: none;
+}
+
+.btn:hover {
+    background-color: #66FCF1;
+    color: #1F2833;
+    transition: 500ms background-color;
+}
