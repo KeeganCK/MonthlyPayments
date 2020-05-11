@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from './Button';
 import Modal from './Modal';
 import AmountsModal from './AmountsModal';
@@ -6,10 +6,7 @@ import AddModal from './AddModal';
 
 const User = props => {
 
-	const calcTotal = () => {
-		let total = props.rent + props.internet + props.phone + props.hydro + props.grocery;
-		return total.toFixed(2);
-	}
+	const [total, setTotal] = useState(0);
 
 	const [showModal, setShowModal] = useState(false);
 	const [showAmountsModal, setShowAmountsModal] = useState(false);
@@ -18,8 +15,10 @@ const User = props => {
 		rent: '',
 		internet: '',
 		phone: '',
+		carInsurance: '',
 		hydro: '',
-		grocery: ''
+		grocery: '',
+		miscellaneous: ''
 	})
 
     const showPayBills = () => {
@@ -40,39 +39,17 @@ const User = props => {
 		setShowAddModal(false);
     }
 
-	const payBills = async event => {
-		try {
-			const response = await fetch(`${process.env.REACT_APP_URL_PROD}/paybills`, {
-				method: "POST",
-				headers: {
-					"Content-type": "application/json"
-				},
-				body: JSON.stringify({
-					rent: amounts.rent,
-					internet: amounts.internet,
-					phone: amounts.phone,
-					hydro: amounts.hydro,
-					grocery: amounts.grocery,
-					id: props.id,
-					name: props.name
-				})
-			})
-
-			const responseData = response.json();
-
-			if(!response.ok) {
-				throw new Error(responseData.message)
-			}
-
-			onCancel();
-		} catch (err) {
-
-		}
-	}
+	useEffect(() => {
+		let newTotal = total;
+		newTotal = props.rent + props.internet + props.phone + props.hydro + props.grocery + props.carInsurance + props.miscellaneous;
+		setTotal(newTotal);
+	}, [props.rent, props.internet, props.phone, props.hydro, props.grocery, props.carInsurance, props.miscellaneous])
 
 	const changeAmounts = async event => {
+		event.preventDefault();
 		try {
-			const response = await fetch(`${process.env.REACT_APP_URL_PROD}/changeamounts`, {
+			// const response = await fetch(`http://localhost:5000/changeamounts`, {
+			const response = await fetch(`https://mainexpenses.herokuapp.com/changeamounts`, {
 				method: "POST",
 				headers: {
 					"Content-type": "application/json"
@@ -81,10 +58,13 @@ const User = props => {
 					rent: amounts.rent,
 					internet: amounts.internet,
 					phone: amounts.phone,
+					carInsurance: amounts.carInsurance,
 					hydro: amounts.hydro,
 					grocery: amounts.grocery,
+					miscellaneous: amounts.miscellaneous,
 					id: props.id,
-					name: props.name
+					name: props.name,
+					total: total
 				})
 			})
 
@@ -93,16 +73,27 @@ const User = props => {
 			if(!response.ok) {
 				throw new Error(responseData.message)
 			}
-
 			onCancel();
+			setAmounts({
+				rent: '',
+				internet: '',
+				phone: '',
+				carInsurance: '',
+				hydro: '',
+				grocery: '',
+				miscellaneous: ''
+			})
+			props.setSomething(Math.floor(Math.random() *Math.floor(100)));
 		} catch (err) {
 
 		}
 	}
 
 	const addAmount = async event => {
+		event.preventDefault();
 		try {
-			const response = await fetch(`${process.env.REACT_APP_URL_PROD}/addamounts`, {
+			// const response = await fetch(`http://localhost:5000/addamounts`, {
+			const response = await fetch(`https://mainexpenses.herokuapp.com/addamounts`, {
 				method: "POST",
 				headers: {
 					"Content-type": "application/json"
@@ -111,10 +102,13 @@ const User = props => {
 					rent: amounts.rent,
 					internet: amounts.internet,
 					phone: amounts.phone,
+					carInsurance: amounts.carInsurance,
 					hydro: amounts.hydro,
 					grocery: amounts.grocery,
+					miscellaneous: amounts.miscellaneous,
 					id: props.id,
-					name: props.name
+					name: props.name,
+					total: total
 				})
 			})
 
@@ -125,6 +119,16 @@ const User = props => {
 			}
 
 			onCancel();
+			setAmounts({
+				rent: '',
+				internet: '',
+				phone: '',
+				carInsurance: '',
+				hydro: '',
+				grocery: '',
+				miscellaneous: ''
+			})
+			props.setSomething(Math.floor(Math.random() *Math.floor(100)));
 		} catch (err) {
 
 		}
@@ -170,38 +174,40 @@ const User = props => {
 		}))
 	}
 
+	const changeCarInsurance = event => {
+		const value = event.target.value;
+		setAmounts(prevState => ({
+			...prevState,
+			carInsurance: value
+		}))
+	}
+
+	const changeMiscellaneous = event => {
+		const value = event.target.value;
+		setAmounts(prevState => ({
+			...prevState,
+			miscellaneous: value
+		}))
+	}
+
 	return (
 		<React.Fragment>
 		 <div className="user">
 			<h3>{props.name}</h3>
-			<h4>Amount Owed</h4>
+			<h4>Month Expenses</h4>
 			<p className="paraUser">Rent: ${props.rent.toFixed(2)}</p>
 			<p className="paraUser">Internet: ${props.internet.toFixed(2)}</p>
 			<p className="paraUser">Phone: ${props.phone.toFixed(2)}</p>
+			<p className="paraUser">Car Insurance: ${props.carInsurance.toFixed(2)}</p>
 			<p className="paraUser">Hydro: ${props.hydro.toFixed(2)}</p>
 			<p className="paraUser">Grocery: ${props.grocery.toFixed(2)}</p>
-			<p>Total: ${calcTotal()}</p>
-			<Button name="Pay Bills" onClick={showPayBills} style={{marginBottom: "0.5rem"}}/>
+			<p className="paraUser">Miscellaneous: ${props.miscellaneous.toFixed(2)}</p>
+
+			<p>Total: ${total.toFixed(2)}</p>
 			<Button name="Change Amounts Owed" onClick={showChangeAmounts} style={{marginBottom: "0.5rem"}}/>
 			<Button name="Add to the Amounts" onClick={showAddAmount} />
 
 		</div>
-		<Modal
-			show={showModal}
-			onCancel={onCancel}
-			name={props.name}
-			payBills={payBills}
-			rent={amounts.rent}
-			internet={amounts.internet}
-			phone={amounts.phone}
-			hydro={amounts.hydro}
-			grocery={amounts.grocery}
-			changeRent={changeRent}
-			changeInternet={changeInternet}
-			changePhone={changePhone}
-			changeHydro={changeHydro}
-			changeGrocery={changeGrocery}
-		/>
 		<AmountsModal
 			show={showAmountsModal}
 			onCancel={onCancel}
@@ -210,13 +216,17 @@ const User = props => {
 			rent={amounts.rent}
 			internet={amounts.internet}
 			phone={amounts.phone}
+			carInsurance={amounts.carInsurance}
 			hydro={amounts.hydro}
 			grocery={amounts.grocery}
+			miscellaneous={amounts.miscellaneous}
 			changeRent={changeRent}
 			changeInternet={changeInternet}
 			changePhone={changePhone}
 			changeHydro={changeHydro}
 			changeGrocery={changeGrocery}
+			changeCarInsurance={changeCarInsurance}
+			changeMiscellaneous={changeMiscellaneous}
 		/>
 		<AddModal
 			show={showAddModal}
@@ -226,13 +236,17 @@ const User = props => {
 			rent={amounts.rent}
 			internet={amounts.internet}
 			phone={amounts.phone}
+			carInsurance={amounts.carInsurance}
 			hydro={amounts.hydro}
 			grocery={amounts.grocery}
+			miscellaneous={amounts.miscellaneous}
 			changeRent={changeRent}
 			changeInternet={changeInternet}
 			changePhone={changePhone}
 			changeHydro={changeHydro}
 			changeGrocery={changeGrocery}
+			changeCarInsurance={changeCarInsurance}
+			changeMiscellaneous={changeMiscellaneous}
 		/>
 		</React.Fragment>
 	);

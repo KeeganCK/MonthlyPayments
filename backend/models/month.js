@@ -15,6 +15,8 @@ const monthSchema = new mongoose.Schema({
 				carInsurance: 75,
 				hydro: 10,
 				grocery: 0,
+				miscellaneous: 0,
+				total: 582.67 + 30 + 75 + 10 + 43
 			},
 			{
 				name: "Milena",
@@ -23,7 +25,9 @@ const monthSchema = new mongoose.Schema({
 				phone: 0,
 				carInsurance: 75,
 				hydro: 10,
-				grocery: 0
+				grocery: 0,
+				miscellaneous: 0,
+				total: 582.67 + 30 + 75 + 10
 			},
 			{
 				name: "Miller",
@@ -32,7 +36,9 @@ const monthSchema = new mongoose.Schema({
 				phone: 0,
 				carInsurance: 0,
 				hydro: 10,
-				grocery: 0
+				grocery: 0,
+				miscellaneous: 0,
+				total: 582.67 + 30 + 10
 			}
 		]
 	}

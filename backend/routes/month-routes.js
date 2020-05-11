@@ -7,8 +7,6 @@ router.get('/getmonths', monthControllers.getMonths);
 
 router.post('/addmonth', monthControllers.addMonth);
 
-router.post('/paybills', monthControllers.payBills);
-
 router.post('/changeamounts', monthControllers.changeAmounts);
 
 router.post('/addamounts', monthControllers.addAmounts);

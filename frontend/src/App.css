@@ -11,14 +11,14 @@ body, html {
 .container {
     margin-left: 7.5%;
     margin-right: 7.5%;
-    margin-top: 6rem;
+    margin-top: 2rem;
 }
 
 @media(max-width: 768px) {
     .container {
         margin-left: 2.5%;
         margin-right: 2.5%;
-        margin-top: 6rem;
+        margin-top: 2rem;
     }
 }
 
@@ -93,6 +93,17 @@ body, html {
     margin-top: 0;
 }
 
+/* Table styles */
+.table {
+    width: 100%;
+}
+
+td, th {
+  text-align: left;
+  padding: 4px 15px 4px 15px;
+  margin: 0;
+}
+
 /* Button Styles */
 .btn {
     width: 100%;
@@ -113,4 +124,31 @@ body, html {
     background-color: #66FCF1;
     color: #1F2833;
     transition: 500ms background-color;
+}
+
+.btnActive {
+    width: 100%;
+    padding: 5px 10px 5px 10px;
+    border: 1px solid #66FCF1;
+    background-color: #66FCF1;
+    color: #1F2833;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.groceryBtn {
+    width: 100%;
+    padding: 10px 10px 10px 10px;
+    color: #66FCF1;
+    border: 1px solid #66FCF1;
+    background-color: #1F2833;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+
+.minusBtn {
+    border: 0;
+    border-radius: 5px;
+    color: #66FCF1;
+    background-color: #1F2833;
 }

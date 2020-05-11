@@ -13,8 +13,11 @@ const UserLine = props => {
 					internet={user.internet}
 					phone={user.phone}
 					carInsurance={user.carInsurance}
+					carInsurance={user.carInsurance}
 					hydro={user.hydro}
 					grocery={user.grocery}
+					miscellaneous={user.miscellaneous}
+					setSomething={props.setSomething}
 				/>
 			))}
 		</div>

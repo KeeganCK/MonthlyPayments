@@ -11,16 +11,18 @@ const ModalOverlay = props => {
 	const content=(
 		<div className={`modal ${(props.className)}`}>
 		<div className="modal__conent" style={{marginLeft: "1rem", marginRight: "0.3rem"}}>
-			<h4 style={{textAlign: "center"}}>Amount to be Paid For {props.name}</h4>
+			<h4 style={{textAlign: "center"}}>Change Amounts for {props.name}</h4>
 			<form style={{display: "flex", flexDirection: "column", alignItems: "center"}} onSubmit={props.changeAmounts}>
 			<input
 				type="number"
+				step="0.01"
 				className="formInputs"
 				placeholder="Rent"
 				value={props.rent}
 				onChange={props.changeRent}
 			/>
 			<input
+				step="0.01"
 				type="number"
 				className="formInputs"
 				placeholder="Internet"
@@ -28,6 +30,7 @@ const ModalOverlay = props => {
 				onChange={props.changeInternet}
 			/>
 			<input
+				step="0.01"
 				type="number"
 				className="formInputs"
 				placeholder="Phone"
@@ -36,6 +39,15 @@ const ModalOverlay = props => {
 			/>
 			<input
 				type="number"
+				step="0.01"
+				className="formInputs"
+				placeholder="Car Insurance"
+				value={props.carInsurance}
+				onChange={props.changeCarInsurance}
+			/>
+			<input
+				type="number"
+				step="0.01"
 				className="formInputs"
 				placeholder="Hydro"
 				value={props.hydro}
@@ -43,10 +55,19 @@ const ModalOverlay = props => {
 			/>
 			<input
 				type="number"
+				step="0.01"
 				className="formInputs"
 				placeholder="Grocery"
 				value={props.grocery}
 				onChange={props.changeGrocery}
+			/>
+			<input
+				type="number"
+				step="0.01"
+				className="formInputs"
+				placeholder="Miscellaneous"
+				value={props.miscellaneous}
+				onChange={props.changeMiscellaneous}
 			/>
 			<Button type="submit" name="Change Amounts" class={"btnPay"} style={{marginBottom: "1rem"}}/>
 			</form>

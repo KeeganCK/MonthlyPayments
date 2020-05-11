@@ -10,50 +10,13 @@ const Main = props => {
 		year: ''
 	})
 
-	const [months, setMonths] = useState();
-
 	const [showMonthModal, setShowMonthModal] = useState(false);
-
-	const [selectionArray, setSelectionArray] = useState([]);
-	const [selection, setSelection] = useState();
-
-	const [monthYear, setMonthYear] = useState([]);
-	const [something, setSomething] = useState();
-
-	useEffect(() => {
-		const getMonths = async () => {
-			try {
-				const response = await fetch(`${process.env.REACT_APP_URL_PROD}/getmonths`);
-				const responseData = await response.json();
-
-				if(!response.ok) {
-					throw new Error(responseData.message)
-				}
-
-				const monthData = responseData.months;
-
-				let newArray = [];
-				for(let i = 0; i < monthData.length; i++) {
-					newArray.push(monthData[i].month + ' ' + monthData[i].year)
-				}
-
-				const index = monthData.length - 1;
-
-				setMonthYear(newArray);
-				setSelection(monthData[index].month + ' ' + monthData[index].year)
-				setMonths(monthData)
-
-			} catch (err) {
-
-			}
-		}
-		getMonths();
-	}, [something])
 
 	const addMonth = async event => {
 		event.preventDefault();
 		try {
-			const response = await fetch(`${process.env.REACT_APP_URL_PROD}/addmonth`, {
+			// const response = await fetch(`http://localhost:5000/addmonth`, {
+			const response = await fetch(`https://mainexpenses.herokuapp.com/addmonth`, {
 				method: "POST",
 				headers: {
 					"Content-type": "application/json"
@@ -72,7 +35,7 @@ const Main = props => {
 
 		}
 		closeModal();
-		setSomething("hi");
+		props.setSomething("hi");
 	}
 
 	const showModal = () => {
@@ -97,20 +60,16 @@ const Main = props => {
 		})
 	}
 
-	const changeSelection = event => {
-		setSelection(event.target.value)
-	}
-
 	return (
 		<div className="container">
 			<div style={{display: "flex", flexDirection: "row"}}>
-				{months &&
+				{props.months &&
 					<select
-						value={selection}
-						onChange={changeSelection}
+						value={props.selection}
+						onChange={props.changeSelection}
 						className="selectMonth"
 					>
-					{months.map((month, i) => (
+					{props.months.map((month, i) => (
 						<option key={month.month + month.year} value={month.month + ' ' + month.year}>
 							{month.month + ' ' + month.year}
 						</option>
@@ -118,8 +77,9 @@ const Main = props => {
 				</select>}
 				<Button name="Add Month" style={{marginLeft: "1rem"}} onClick={showModal}/>
 			</div>
-            {months && months.length == monthYear.length && <UserLine
-				users={months[monthYear.indexOf(selection)]}
+            {props.months && props.months.length == props.monthYear.length && <UserLine
+				users={props.months[props.monthYear.indexOf(props.selection)]}
+				setSomething={props.setSomething}
 			/>}
 			<MonthModal
 				show={showMonthModal}

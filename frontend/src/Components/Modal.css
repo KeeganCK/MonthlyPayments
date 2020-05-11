@@ -4,17 +4,36 @@
     border: 1px solid #66FCF1;
     color: #66FCF1;
     background-color: #1F2833;
-    padding-top: 12px;
-    padding-bottom: 12px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     padding-left: 5px;
     padding-right: 5px;
-    margin-bottom: 1rem;
+    margin-bottom: 0.3rem;
 }
 
 .formInputs:focus {
     outline: none;
     border-color: #66FCF1;
 }
+
+.formInputsGrocery {
+    width: 100%;
+    border-radius: 5px 0 0 5px;
+    border: 1px solid #66FCF1;
+    color: #66FCF1;
+    background-color: #1F2833;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-bottom: 0.3rem;
+}
+
+.formInputsGrocery:focus {
+    outline: none;
+    border-color: #66FCF1;
+}
+
 .modal {
   z-index: 100;
   position: fixed;

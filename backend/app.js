@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const monthRouter = require('./routes/month-routes');
@@ -27,8 +28,6 @@ app.use((req, res, next) => {
 // 	const error = new HttpError('Could not find this route', 404);
 // 	throw error;
 // });
-
-//something
 
 app.use((error, req, res, next) => {
 	res.status(error.code || 500);
